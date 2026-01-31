@@ -1,0 +1,12 @@
+title: Noxus
+description: "Consultoria em omnichannel e automacoes com chatbots de IA."
+url: "" # set in GitHub Pages
+baseurl: "" # set in GitHub Pages
+markdown: kramdown
+permalink: pretty
+theme: null
+plugins: []
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

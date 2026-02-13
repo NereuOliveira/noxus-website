@@ -1,20 +1,22 @@
 ---
 layout: default
 title: Noxus
-description: Consultoria em omnichannel e automacoes com chatbots de IA para empresas no Brasil.
+description: Consultoria em omnichannel e automações com chatbots de IA para empresas no Brasil.
 ---
 
 <div class="page">
   <header>
-    <div class="logo">
-      <span class="logo-mark" aria-hidden="true"></span>
+    <a class="logo" href="{{ "/" | relative_url }}" aria-label="Noxus - Página inicial">
+      <img class="logo-image" src="{{ "/assets/img/favicon-32x32.png" | relative_url }}" alt="Noxus logo" />
       <span>Noxus</span>
-    </div>
+    </a>
     <nav class="nav">
-      <a href="#features">Diferenciais</a>
-      <a href="#process">Processo</a>
-      <a href="#proof">Resultados</a>
+      <a href="#about">Sobre</a>
+      <a href="#mission">Missão</a>
+      <a href="#solutions">Soluções</a>
+      <a href="#services">Serviços</a>
       <a href="#faq">FAQ</a>
+      <a href="#start">Contato</a>
     </nav>
     <a class="pill" href="#start">
       <span>Fale com a Noxus</span>
@@ -25,78 +27,149 @@ description: Consultoria em omnichannel e automacoes com chatbots de IA para emp
   <main>
     <section class="hero hero-single">
       <div>
-        <div class="pill reveal">Consultoria em omnichannel e automacoes com IA</div>
-        <h1 class="reveal">Conversas inteligentes que liberam sua equipe para o que importa.</h1>
+        <div class="pill reveal">IA aplicada ao atendimento e operação digital</div>
+        <h1 class="reveal">Desenhamos e implementamos sistemas de IA que geram resultado no negócio.</h1>
         <p class="reveal">
-          A Noxus conecta seus canais, automatiza fluxos e entrega chatbots com IA
-          para reduzir filas, acelerar respostas e manter o cliente sempre atendido.
+          A Noxus combina estratégia, automação e engenharia para conectar canais,
+          reduzir tarefas manuais e escalar atendimento com qualidade.
         </p>
+        <img
+          class="section-image section-image-hero reveal"
+          src="{{ "/assets/img/hero-omnichannel-ia.png" | relative_url }}"
+          alt="Operação omnichannel com IA conectando canais e dashboards de atendimento"
+          loading="eager"
+          decoding="async"
+        />
         <div class="cta-group reveal">
-          <a class="button primary" href="#start">Quero um diagnostico</a>
-          <a class="button secondary" href="#features">Ver diferenciais</a>
+          <a class="button primary" href="#start">Quero um diagnóstico</a>
+          <a class="button secondary" href="#solutions">Ver soluções</a>
         </div>
       </div>
     </section>
 
-    <section id="features" class="section">
+    <section id="about" class="section">
       <div class="section-head reveal">
-        <h2>Omnichannel de ponta a ponta.</h2>
-        <p>Arquitetura pensada para SaaS brasileiros que precisam escalar atendimento.</p>
+        <h2>Sobre a Noxus</h2>
+        <p>Não vendemos apenas ferramentas. Construímos operações inteligentes com foco em ROI.</p>
       </div>
       <div class="grid-3">
         <div class="card reveal">
-          <h3>Orquestracao de canais</h3>
-          <p>WhatsApp, webchat, redes sociais e voice trabalhando como um unico fluxo para SaaS.</p>
+          <img
+            class="section-image section-image-card"
+            src="{{ "/assets/img/about-estrategia-operacao.png" | relative_url }}"
+            alt="Estratégia e desenho de operação com IA"
+            loading="lazy"
+            decoding="async"
+          />
+          <h3>Direção estratégica</h3>
+          <p>Traduzimos metas de negócio em casos de uso de IA com impacto real em eficiência e receita.</p>
         </div>
         <div class="card reveal">
-          <h3>Automacoes com IA</h3>
-          <p>Chatbots treinados para triagem, atendimento e resolucao sem perder contexto.</p>
+          <img
+            class="section-image section-image-card"
+            src="{{ "/assets/img/about-conectividade-sistemas.png" | relative_url }}"
+            alt="Conectividade entre sistemas e canais em uma arquitetura integrada"
+            loading="lazy"
+            decoding="async"
+          />
+          <h3>Integração total</h3>
+          <p>Conectamos canais, CRM e sistemas internos para criar uma jornada única de atendimento.</p>
         </div>
         <div class="card reveal">
-          <h3>Visao operacional</h3>
-          <p>Dashboards e indicadores para medir tempo de resposta, SLAs e conversoes.</p>
+          <img
+            class="section-image section-image-card"
+            src="{{ "/assets/img/about-visao-performance.png" | relative_url }}"
+            alt="Visão de performance com indicadores operacionais"
+            loading="lazy"
+            decoding="async"
+          />
+          <h3>Decisão orientada por dados</h3>
+          <p>Acompanhamos KPIs operacionais para evoluir fluxos com base em evidência, não em suposição.</p>
         </div>
       </div>
     </section>
 
-    <section id="process" class="section">
+    <section id="mission" class="section">
       <div class="section-head reveal">
-        <h2>Implementacao rapida e guiada.</h2>
-        <p>Processo enxuto para colocar a operacao em producao sem friccao.</p>
+        <h2>Missão</h2>
+        <p>Capacitar empresas para operar com mais velocidade, previsibilidade e qualidade usando IA.</p>
+      </div>
+      <div class="mission-layout">
+        <img
+          class="section-image section-image-mission reveal"
+          src="{{ "/assets/img/mission-workshop-jornada.png" | relative_url }}"
+          alt="Time em workshop estratégico com mapa de jornada e planejamento de IA"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="mission-copy reveal">
+          <p>
+            Trabalhamos para transformar operações reativas em sistemas inteligentes, capazes de atender melhor,
+            escalar com controle de custo e liberar o time humano para atividades de maior valor.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="solutions" class="section">
+      <div class="section-head reveal">
+        <h2>Soluções</h2>
+        <p>Arquiteturas práticas para atendimento, operação interna e crescimento com IA.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card reveal">
+          <img
+            class="section-image section-image-card"
+            src="{{ "/assets/img/solution-agente-atendimento.png" | relative_url }}"
+            alt="Agente de atendimento IA em operação multicanal"
+            loading="lazy"
+            decoding="async"
+          />
+          <h3>Agentes de atendimento IA</h3>
+          <p>Assistentes para WhatsApp, web e redes sociais com triagem, respostas e handoff para humanos.</p>
+        </div>
+        <div class="card reveal">
+          <img
+            class="section-image section-image-card"
+            src="{{ "/assets/img/solution-copiloto-equipe.png" | relative_url }}"
+            alt="Copiloto de IA apoiando analista com sugestões e automações"
+            loading="lazy"
+            decoding="async"
+          />
+          <h3>Copilotos para equipes</h3>
+          <p>Suporte ao time com sugestão de respostas, consulta de base de conhecimento e automação de rotinas.</p>
+        </div>
+        <div class="card reveal">
+          <img
+            class="section-image section-image-card"
+            src="{{ "/assets/img/solution-ia-privada-compliance.png" | relative_url }}"
+            alt="IA privada com foco em segurança, compliance e governança de dados"
+            loading="lazy"
+            decoding="async"
+          />
+          <h3>IA privada e compliance</h3>
+          <p>Implementação com regras de segurança, governança de dados e aderência aos requisitos do negócio.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="section-head reveal">
+        <h2>Serviços</h2>
+        <p>Do diagnóstico à operação assistida, com entregas claras em cada fase.</p>
       </div>
       <div class="timeline">
         <div class="step reveal">
-          <strong>Semana 1:</strong> Diagnostico, mapeamento de jornadas e metas.
+          <strong>AI Consulting:</strong> avaliação de maturidade, mapa de oportunidades e plano de execução.
         </div>
         <div class="step reveal">
-          <strong>Semana 2:</strong> Desenho de fluxos omnichannel e arquitetura de dados.
+          <strong>Automation Flows:</strong> desenho e implementação de fluxos multicanal com IA e integrações.
         </div>
         <div class="step reveal">
-          <strong>Semana 3:</strong> Implementacao de chatbots, integracoes e treinamentos.
+          <strong>AI Engineering:</strong> desenvolvimento, treinamento, QA e melhoria continua dos agentes.
         </div>
         <div class="step reveal">
-          <strong>Semana 4:</strong> QA, rollout assistido e indicadores de sucesso.
-        </div>
-      </div>
-    </section>
-
-    <section id="proof" class="section">
-      <div class="section-head reveal">
-        <h2>Resultados reais para times SaaS.</h2>
-        <p>Consultoria focada em performance operacional e experiencia do cliente.</p>
-      </div>
-      <div class="grid-3">
-        <div class="card reveal">
-          <p class="quote">"Conseguimos automatizar 60% do atendimento no WhatsApp em 30 dias."</p>
-          <p>- Operacao varejo</p>
-        </div>
-        <div class="card reveal">
-          <p class="quote">"A centralizacao dos canais reduziu o retrabalho da equipe."</p>
-          <p>- SaaS B2B</p>
-        </div>
-        <div class="card reveal">
-          <p class="quote">"Os chatbots com IA melhoraram o tempo de resposta em picos."</p>
-          <p>- Servicos financeiros</p>
+          <strong>Operação Assistida:</strong> acompanhamento de KPIs, ajustes e evolução mensal da solução.
         </div>
       </div>
     </section>
@@ -104,20 +177,28 @@ description: Consultoria em omnichannel e automacoes com chatbots de IA para emp
     <section id="faq" class="section">
       <div class="section-head reveal">
         <h2>Perguntas frequentes.</h2>
-        <p>O essencial para iniciar a consultoria.</p>
+        <p>Respostas práticas para entender escopo, prazo e operação.</p>
       </div>
       <div class="faq">
         <div class="faq-item reveal">
-          <strong>Com quais canais voces trabalham?</strong>
-          <p>WhatsApp, Instagram, webchat, email e integracoes com telefonia e CRM.</p>
+          <strong>Com quais canais vocês trabalham?</strong>
+          <p>WhatsApp, Instagram, webchat, email e integrações com telefonia e CRM.</p>
         </div>
         <div class="faq-item reveal">
           <strong>Quanto tempo leva para ver resultados?</strong>
-          <p>Os primeiros ganhos surgem nas primeiras 4 semanas, com evolucao continua.</p>
+          <p>Os primeiros ganhos surgem nas primeiras 4 semanas, com evolução contínua.</p>
         </div>
         <div class="faq-item reveal">
-          <strong>O que voces precisam da minha equipe?</strong>
-          <p>Acesso aos canais, dados de atendimento e um sponsor para acelerar decisoes.</p>
+          <strong>O que vocês precisam da minha equipe?</strong>
+          <p>Acesso aos canais, dados de atendimento e um sponsor para acelerar decisões.</p>
+        </div>
+        <div class="faq-item reveal">
+          <strong>Vocês integram com CRM, ERP e ferramentas atuais?</strong>
+          <p>Sim. Priorizamos integrar com o seu ecossistema para acelerar entrega e evitar trocas desnecessárias.</p>
+        </div>
+        <div class="faq-item reveal">
+          <strong>Como medimos sucesso?</strong>
+          <p>Definimos metas com KPIs como tempo de resposta, resolução automática, SLA e impacto operacional.</p>
         </div>
       </div>
     </section>
@@ -125,10 +206,9 @@ description: Consultoria em omnichannel e automacoes com chatbots de IA para emp
     <section id="start" class="cta">
       <div class="cta-box reveal">
         <h2>Pronto para destravar seu atendimento?</h2>
-        <p>Agende um diagnostico e receba um plano de omnichannel sob medida.</p>
+        <p>Agende um diagnóstico e receba um plano de omnichannel sob medida.</p>
         <div class="cta-group" style="justify-content:center;">
           <a class="button primary" href="mailto:contato@noxus.dev">Falar com a Noxus</a>
-          <a class="button secondary" href="https://noxus.dev">Visitar noxus.dev</a>
         </div>
       </div>
     </section>
@@ -137,9 +217,9 @@ description: Consultoria em omnichannel e automacoes com chatbots de IA para emp
   <footer class="footer">
     <span>(c) 2026 Noxus</span>
     <span>
-      <a href="{{ "/privacy" | relative_url }}">Politica de Privacidade</a>
+      <a href="{{ "/privacy" | relative_url }}">Política de Privacidade</a>
       |
-      <a href="{{ "/terms" | relative_url }}">Termos de Servico</a>
+      <a href="{{ "/terms" | relative_url }}">Termos de Serviço</a>
     </span>
   </footer>
 </div>

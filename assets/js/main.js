@@ -1,6 +1,7 @@
 const revealItems = document.querySelectorAll(".reveal");
 const siteHeader = document.querySelector(".page > header");
 const themePreferenceKey = "theme-preference";
+const mobileMenuQuery = window.matchMedia("(max-width: 860px)");
 
 const getActiveTheme = () => (document.documentElement.dataset.theme === "light" ? "light" : "dark");
 
@@ -55,6 +56,149 @@ const installThemeToggle = () => {
   });
 
   siteHeader.appendChild(toggle);
+  return toggle;
+};
+
+const initMobileMenu = (themeToggle) => {
+  if (!siteHeader) return { closeMenu: () => {} };
+
+  const desktopNav = siteHeader.querySelector(".nav");
+  const desktopCta = siteHeader.querySelector(".pill");
+  if (!desktopNav || !desktopCta || !themeToggle) return { closeMenu: () => {} };
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "menu-toggle";
+  trigger.setAttribute("aria-expanded", "false");
+  trigger.setAttribute("aria-controls", "mobile-menu-drawer");
+  trigger.setAttribute("aria-label", "Abrir menu");
+  trigger.innerHTML = `
+    <span class="menu-toggle-bar"></span>
+    <span class="menu-toggle-bar"></span>
+    <span class="menu-toggle-bar"></span>
+  `;
+  siteHeader.insertBefore(trigger, desktopNav);
+
+  const backdrop = document.createElement("div");
+  backdrop.className = "menu-backdrop";
+  backdrop.hidden = true;
+
+  const drawer = document.createElement("aside");
+  drawer.id = "mobile-menu-drawer";
+  drawer.className = "menu-drawer";
+  drawer.setAttribute("role", "dialog");
+  drawer.setAttribute("aria-modal", "true");
+  drawer.setAttribute("aria-hidden", "true");
+
+  const drawerTop = document.createElement("div");
+  drawerTop.className = "menu-drawer-top";
+
+  const drawerTitle = document.createElement("strong");
+  drawerTitle.className = "menu-drawer-title";
+  drawerTitle.textContent = "Menu";
+
+  const closeButton = document.createElement("button");
+  closeButton.type = "button";
+  closeButton.className = "menu-close";
+  closeButton.setAttribute("aria-label", "Fechar menu");
+  closeButton.textContent = "Fechar";
+
+  const mobileNav = desktopNav.cloneNode(true);
+  mobileNav.classList.add("menu-nav");
+
+  const mobileCta = desktopCta.cloneNode(true);
+  mobileCta.classList.add("menu-cta");
+
+  drawerTop.append(drawerTitle, themeToggle, closeButton);
+  drawer.append(drawerTop, mobileNav, mobileCta);
+  document.body.append(backdrop, drawer);
+
+  let isMenuOpen = false;
+  let restoreFocusElement = null;
+
+  const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  const getFocusable = () => Array.from(drawer.querySelectorAll(focusableSelector)).filter((el) => !el.hasAttribute("hidden"));
+
+  const placeThemeToggle = () => {
+    if (mobileMenuQuery.matches) {
+      drawerTop.insertBefore(themeToggle, closeButton);
+    } else {
+      siteHeader.appendChild(themeToggle);
+    }
+  };
+
+  const closeMenu = () => {
+    if (!isMenuOpen) return;
+    isMenuOpen = false;
+    document.body.classList.remove("menu-open");
+    drawer.setAttribute("aria-hidden", "true");
+    backdrop.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.setAttribute("aria-label", "Abrir menu");
+    if (restoreFocusElement && typeof restoreFocusElement.focus === "function") {
+      restoreFocusElement.focus();
+    }
+    restoreFocusElement = null;
+  };
+
+  const openMenu = () => {
+    if (isMenuOpen) return;
+    isMenuOpen = true;
+    restoreFocusElement = document.activeElement;
+    document.body.classList.add("menu-open");
+    drawer.setAttribute("aria-hidden", "false");
+    backdrop.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+    trigger.setAttribute("aria-label", "Fechar menu");
+    const focusables = getFocusable();
+    if (focusables.length > 0) {
+      focusables[0].focus();
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (!isMenuOpen) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeMenu();
+      return;
+    }
+    if (event.key !== "Tab") return;
+
+    const focusables = getFocusable();
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
+  trigger.addEventListener("click", () => {
+    if (isMenuOpen) closeMenu();
+    else openMenu();
+  });
+  closeButton.addEventListener("click", closeMenu);
+  backdrop.addEventListener("click", closeMenu);
+  document.addEventListener("keydown", handleKeyDown);
+
+  mobileNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+  mobileCta.addEventListener("click", closeMenu);
+
+  mobileMenuQuery.addEventListener("change", () => {
+    closeMenu();
+    placeThemeToggle();
+  });
+  placeThemeToggle();
+
+  return { closeMenu };
 };
 
 if (revealItems.length > 0) {
@@ -74,7 +218,8 @@ if (revealItems.length > 0) {
 }
 
 if (siteHeader) {
-  installThemeToggle();
+  const themeToggle = installThemeToggle();
+  const { closeMenu } = initMobileMenu(themeToggle);
   const root = document.documentElement;
   let isCompact = false;
 
@@ -83,6 +228,13 @@ if (siteHeader) {
   };
 
   const syncHeaderState = () => {
+    if (mobileMenuQuery.matches) {
+      isCompact = false;
+      document.body.classList.remove("nav-compact");
+      updateHeaderOffset();
+      return;
+    }
+
     const nextCompact = window.scrollY > 24;
     if (nextCompact !== isCompact) {
       isCompact = nextCompact;
@@ -112,7 +264,9 @@ if (siteHeader) {
   syncHeaderState();
   window.addEventListener("scroll", syncHeaderState, { passive: true });
   window.addEventListener("resize", updateHeaderOffset);
+  window.addEventListener("orientationchange", updateHeaderOffset);
   window.addEventListener("load", updateHeaderOffset);
+  mobileMenuQuery.addEventListener("change", syncHeaderState);
   siteHeader.addEventListener("transitionend", (event) => {
     if (event.propertyName === "padding-top" || event.propertyName === "padding-bottom") {
       updateHeaderOffset();
@@ -125,6 +279,7 @@ if (siteHeader) {
       const hash = link.getAttribute("href");
       if (!hash || hash === "#") return;
       event.preventDefault();
+      closeMenu();
       scrollToHashTarget(hash);
     });
   });
